@@ -1,0 +1,39 @@
+<script>
+    import CoasterList from '$lib/components/CoasterList.svelte';
+    import Dropdown from '$lib/components/Dropdown.svelte';
+
+    let continent = '';
+    let country = '';
+    let location = '';
+    let coasterName = '';
+
+    let continents = ['Asia', 'Africa', 'Europe', 'North America', 'South America', 'Australia', 'Oceania'];
+    let countries = [];
+    let locations = [];
+
+    function updateCountries() {
+        countries = [];
+        locations = [];
+        if (continent) {
+            countries = [...new Set(getCoasters().filter(coaster => coaster.Continent === continent).map(coaster => coaster.Country))];
+        }
+    }
+
+    function updateLocations() {
+        locations = [];
+        if (continent && country) {
+            locations = [...new Set(getCoasters().filter(coaster => coaster.Continent === continent && coaster.Country === country).map(coaster => coaster.Location))];
+        }
+    }
+
+    updateCountries();
+</script>
+
+<div>
+    <h1>Coaster Score Calculator</h1>
+    <Dropdown options={continents} on:change={updateCountries} bind:value={continent}/>
+    <Dropdown options={countries} on:change={updateLocations} bind:value={country}/>
+    <Dropdown options={locations} bind:value={location}/>
+    <input type="text" bind:value={coasterName} placeholder="Search by Coaster Name"/>
+    <CoasterList/>
+</div>

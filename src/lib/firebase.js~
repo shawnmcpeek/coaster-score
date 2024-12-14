@@ -1,0 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+	apiKey: "AIzaSyDf9Fp2a_84eHdeimmsAst4r6CkODMGQvU",
+	authDomain: "coaster-score.firebaseapp.com",
+	projectId: "coaster-score",
+	storageBucket: "coaster-score.firebasestorage.app",
+	messagingSenderId: "953948340409",
+	appId: "1:953948340409:web:11707a08f997471de59b68",
+	measurementId: "G-E6862R9FJK"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

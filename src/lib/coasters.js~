@@ -1,0 +1,5 @@
+const rawCoasters = require('./coaster_db.json');
+
+export function getCoasters() {
+    return rawCoasters;
+}
