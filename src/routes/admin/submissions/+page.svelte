@@ -1,5 +1,5 @@
 <script>
-    import { getFirestore, collection, query, where, updateDoc, doc, getDocs, deleteDoc, getDoc, addDoc } from 'firebase/firestore';
+    import { getFirestore, collection, query, where, updateDoc, doc, getDocs } from 'firebase/firestore';
     import { onMount } from 'svelte';
     import '../../../styles.css';
 

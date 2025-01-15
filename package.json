@@ -44,7 +44,9 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-node": "^5.2.9",
-		"firebase": "^11.1.0",
-		"lucide-react": "^0.468.0"
+		"firebase": "^10.7.0",
+		"lucide-react": "^0.468.0",
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^4.2.7"
 	}
 }
