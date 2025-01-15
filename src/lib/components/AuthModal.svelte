@@ -1,5 +1,5 @@
 <script>
-    import { showAuthModal, loginUser, registerUser, resetPassword } from '$lib/stores/auth';
+    import { showAuthModal, loginUser, registerUser, resetPassword } from '$lib/stores/Auth.js';
 
     let isLogin = true;
     let email = '';

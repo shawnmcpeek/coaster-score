@@ -1,6 +1,6 @@
 // src/lib/stores/coasters.js
 import { writable } from 'svelte/store';
-import { user } from './auth';
+import { user } from './Auth.js';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { browser } from '$app/environment';
 

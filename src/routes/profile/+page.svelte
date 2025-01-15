@@ -1,5 +1,5 @@
 <script>
-    import { user } from '$lib/stores/auth';
+    import { user } from '$lib/stores/Auth.js';
     import { selectedCoasters } from '$lib/stores/coasters';
     import {getFirestore, doc, updateDoc, getDoc} from 'firebase/firestore';
     import { onMount } from 'svelte';
