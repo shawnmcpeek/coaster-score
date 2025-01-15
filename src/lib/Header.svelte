@@ -1,12 +1,25 @@
 <script>
     import { user, showAuthModal, logoutUser } from '$lib/stores/auth';
     import AuthModal from '$lib/components/AuthModal.svelte';
-    import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+    import { getFirestore, doc, updateDoc, getDoc } from 'firebase/firestore';
     import { selectedCoasters } from '$lib/stores/coasters';
 
+    let isAdmin = false;
     export let currentPath;
     const db = getFirestore();
     let showMenu = false;
+
+    // Check if user is admin when they log in
+    $: if ($user) {
+        console.log('Checking admin status for user:', $user.uid);
+        getDoc(doc(db, 'users', $user.uid)).then(docSnap => {
+            if (docSnap.exists()) {
+                console.log('User data:', docSnap.data());
+                isAdmin = docSnap.data().isAdmin === true;
+                console.log('Is admin?', isAdmin);
+            }
+        });
+    }
 
     async function saveCoasters() {
         if ($user) {
@@ -50,12 +63,14 @@
                 <button class="menu-button" on:click={() => showMenu = !showMenu}>
                     Menu
                 </button>
-
                 {#if showMenu}
                     <div class="menu-dropdown">
                         <a href="/profile">Profile</a>
                         <div class="menu-item">Score: {$selectedCoasters?.size || 0}</div>
                         <a href="/contact">Contact & Support</a>
+                        {#if isAdmin}
+                            <a href="/admin/submissions">Review Submissions</a>
+                        {/if}
                         <button class="sign-out-button" on:click={logoutUser}>Sign Out</button>
                     </div>
                 {/if}
@@ -64,6 +79,20 @@
                     Login to Save Score
                 </button>
             {/if}
+            <a 
+                href="/submit" 
+                class="support-button"
+            >
+                Submit a Coaster
+            </a>
+            <a 
+                href="https://venmo.com/Shawn-McPeek-1"
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="support-button"
+            >
+                Buy Me a Coffee ☕
+            </a>
         </div>
     </div>
 </header>
@@ -96,37 +125,7 @@
         text-align: center;
     }
 
-    .header-controls {
-        justify-self: end;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        position: relative;
-    }
-
-    .login-button, .save-button, .menu-button {
-        background: #0066ff;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        cursor: pointer;
-        font-weight: 500;
-        transition: background-color 0.2s;
-    }
-
-    .login-button:hover, .menu-button:hover {
-        background: #0052cc;
-    }
-
-    .save-button {
-        background: #22c55e;
-    }
-
-    .save-button:hover {
-        background: #16a34a;
-    }
-
+    /* Menu dropdown styles */
     .menu-dropdown {
         position: absolute;
         top: calc(100% + 0.5rem);
@@ -166,23 +165,8 @@
         cursor: default;
     }
 
-    .menu-item:hover {
-        background: none;
-    }
-
     .sign-out-button {
         color: #dc2626 !important;
-    }
-
-    button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    button:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.5);
     }
 
     .home-link {

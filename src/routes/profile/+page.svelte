@@ -44,19 +44,50 @@
             <div class="user-name-section">
                 <h3>Username</h3>
                 {#if isEditing}
-                    <div class="edit-form">
-                        <input
+                    <form on:submit|preventDefault={updateProfile}>
+                        <div class="form-group">
+                            <label for="profile_username">Username</label>
+                            <input
                                 type="text"
+                                id="profile_username"
+                                name="profile_username"
+                                autocomplete="username"
                                 bind:value={userName}
-                                placeholder="Enter username"
-                        />
-                        <button class="save-button" on:click={updateProfile}>Save</button>
-                        <button class="cancel-button" on:click={() => isEditing = false}>Cancel</button>
-                    </div>
+                                class="form-input"
+                                required
+                            />
+                        </div>
+                        <div class="button-group">
+                            <button
+                                type="submit"
+                                id="save_profile"
+                                name="save_profile"
+                                class="primary-button"
+                            >
+                                Save Changes
+                            </button>
+                            <button
+                                type="button"
+                                id="cancel_edit"
+                                name="cancel_edit"
+                                class="cancel-button"
+                                on:click={() => isEditing = false}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 {:else}
                     <div class="display-name">
                         <p>{userName || 'No username set'}</p>
-                        <button class="edit-button" on:click={() => isEditing = true}>Edit</button>
+                        <button
+                            class="edit-button"
+                            id="edit_profile"
+                            name="edit_profile"
+                            on:click={() => isEditing = true}
+                        >
+                            Edit
+                        </button>
                     </div>
                 {/if}
             </div>

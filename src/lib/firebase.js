@@ -1,6 +1,8 @@
 // src/lib/firebase.js
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from 'firebase/firestore';
+import { browser } from '$app/environment';
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,5 +14,7 @@ const firebaseConfig = {
 	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// Only initialize Firebase in the browser, not during SSR
+export const app = browser ? (getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]) : null;
+export const auth = browser ? getAuth(app) : null;
+export const db = browser ? getFirestore(app) : null;

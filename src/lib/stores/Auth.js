@@ -2,6 +2,7 @@
 import { writable } from 'svelte/store';
 import { auth } from '$lib/firebase';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { browser } from '$app/environment';
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -11,23 +12,25 @@ import {
 
 const db = getFirestore();
 export const user = writable(null);
-export const showAuthModal = writable(false);  // This was missing or incorrectly exported
+export const showAuthModal = writable(false);
 
-// Initialize auth state observer
-auth.onAuthStateChanged(async (userData) => {
-    user.set(userData);
-    if (userData) {
-        const userDoc = await getDoc(doc(db, 'users', userData.uid));
-        if (!userDoc.exists()) {
-            await setDoc(doc(db, 'users', userData.uid), {
-                email: userData.email,
-                userName: '',
-                coasterScore: 0,
-                selectedCoasters: []
-            });
+// Only set up auth listener in the browser
+if (browser && auth) {
+    auth.onAuthStateChanged(async (userData) => {
+        user.set(userData);
+        if (userData) {
+            const userDoc = await getDoc(doc(db, 'users', userData.uid));
+            if (!userDoc.exists()) {
+                await setDoc(doc(db, 'users', userData.uid), {
+                    email: userData.email,
+                    userName: '',
+                    coasterScore: 0,
+                    selectedCoasters: []
+                });
+            }
         }
-    }
-});
+    });
+}
 
 export async function loginUser(email, password) {
     try {

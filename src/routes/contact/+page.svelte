@@ -61,61 +61,55 @@
                     Contact Coaster Score
                 </button>
             {:else}
-                <form on:submit={handleSubmit} class="contact-form">
+                <form on:submit|preventDefault={handleSubmit} class="space-y-4">
                     <div class="form-group">
+                        <label for="contact_name">Name</label>
                         <input
-                                type="text"
-                                bind:value={name}
-                                required
-                                placeholder="Your name"
-                                id="name"
-                                autocomplete="name"
+                            type="text"
+                            id="contact_name"
+                            name="contact_name"
+                            autocomplete="name"
+                            bind:value={name}
+                            class="form-input"
+                            required
                         />
                     </div>
 
                     <div class="form-group">
+                        <label for="contact_email">Email</label>
                         <input
-                                type="email"
-                                bind:value={email}
-                                required
-                                placeholder="Your email"
-                                id="email"
-                                autocomplete="email"
+                            type="email"
+                            id="contact_email"
+                            name="contact_email"
+                            autocomplete="email"
+                            bind:value={email}
+                            class="form-input"
+                            required
                         />
                     </div>
 
                     <div class="form-group">
+                        <label for="contact_message">Message</label>
                         <textarea
-                                bind:value={message}
-                                required
-                                placeholder="Your message"
-                                rows="4"
-                                id="message"
-                        ></textarea>
+                            id="contact_message"
+                            name="contact_message"
+                            autocomplete="off"
+                            bind:value={message}
+                            class="form-input"
+                            rows="4"
+                            required
+                        />
                     </div>
 
-                    <div class="button-group">
-                        <button
-                                type="submit"
-                                class="submit-button"
-                                disabled={isSubmitting}
-                        >
-                            {isSubmitting ? 'Sending...' : 'Send Message'}
-                        </button>
-                        <button
-                                type="button"
-                                class="cancel-button"
-                                on:click={() => showForm = false}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-
-                    {#if status}
-                        <p class={status.includes('Error') ? 'error-message' : 'success-message'}>
-                            {status}
-                        </p>
-                    {/if}
+                    <button
+                        type="submit"
+                        id="contact_submit"
+                        name="contact_submit"
+                        disabled={isSubmitting}
+                        class="primary-button"
+                    >
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
                 </form>
             {/if}
         </section>
