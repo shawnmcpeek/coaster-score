@@ -2,12 +2,12 @@
 import { writable } from 'svelte/store';
 import { user } from './Auth.js';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { isBrowser } from 'esm-env';
+import { browser } from '$app/environment';
 
 export const selectedCoasters = writable(new Set());
 
 // Only try to access localStorage in the browser
-if (isBrowser) {
+if (browser) {
     const savedLocal = localStorage.getItem('selectedCoasters');
     if (savedLocal) {
         selectedCoasters.set(new Set(JSON.parse(savedLocal)));
