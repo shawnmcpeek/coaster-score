@@ -5,13 +5,13 @@ import { getFirestore } from 'firebase/firestore';
 import { browser } from '$app/environment';
 
 const firebaseConfig = {
-	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-	appId: import.meta.env.VITE_FIREBASE_APP_ID,
-	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+	apiKey: "AIzaSyDf9Fp2a_84eHdeimmsAst4r6CkODMGQvU",
+	authDomain: "coaster-score.firebaseapp.com",
+	projectId: "coaster-score",
+	storageBucket: "coaster-score.firebasestorage.app",
+	messagingSenderId: "953948340409",
+	appId: "1:953948340409:web:11707a08f997471de59b68",
+	measurementId: "G-E6862R9FJK"
 };
 
 // Only initialize Firebase in the browser, not during SSR
