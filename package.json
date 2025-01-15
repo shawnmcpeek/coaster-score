@@ -44,7 +44,6 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-node": "^2.0.0",
-		"firebase": "^10.7.1",
-		"esm-env": "^1.0.0"
+		"firebase": "^10.7.1"
 	}
 }
