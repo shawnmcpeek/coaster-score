@@ -98,7 +98,7 @@
                             class="form-input"
                             rows="4"
                             required
-                        />
+                        ></textarea>
                     </div>
 
                     <button

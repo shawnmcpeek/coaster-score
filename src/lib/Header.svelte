@@ -1,5 +1,5 @@
 <script>
-    import { user, showAuthModal, logoutUser } from '$lib/stores/auth';
+    import { user, showAuthModal, logoutUser } from '$lib/stores/Auth.js';
     import AuthModal from '$lib/components/AuthModal.svelte';
     import { getFirestore, doc, updateDoc, getDoc } from 'firebase/firestore';
     import { selectedCoasters } from '$lib/stores/coasters';

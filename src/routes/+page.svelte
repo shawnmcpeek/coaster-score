@@ -1,6 +1,6 @@
 <script>
     import { selectedCoasters } from '$lib/stores/coasters';
-    import { user } from '$lib/stores/auth';
+    import { user } from '$lib/stores/Auth.js';
     import { onMount } from 'svelte';
     import { getFirestore, collection, getDocs, query, where, doc, getDoc } from 'firebase/firestore';
     import '../styles.css'
